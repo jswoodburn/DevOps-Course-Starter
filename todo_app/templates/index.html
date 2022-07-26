@@ -15,6 +15,12 @@
           <li>{{todo.title}}</li>
         {% endfor %}
       </ul>
+      <h2>Update your To-Do List</h2>
+      <form method="POST" action="/add-todo">
+          <label>Add a new item</label>
+          <input type="text" name="todo" value=""></input>
+          <button>Submit</button>
+      </form>
     </div>
   </div>
 {% endblock %}
