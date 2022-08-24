@@ -1,7 +1,6 @@
-import os
 from flask import Flask, redirect, render_template, request
 from todo_app.data.session_items import add_item, get_items
-from todo_app.data.trello_items import get_lists_on_board
+from todo_app.data.trello_items import create_item_on_todo_list, get_lists_on_board
 
 from todo_app.flask_config import Config
 from todo_app.item import Item
@@ -25,6 +24,7 @@ def index():
 @app.route('/add-todo', methods=[ 'POST'])
 def add_todo_item():
     new_item = request.form.get('todo')
-    add_item(new_item)
+    # TODO exercise-2: hard coding this to add to start of flow (To Do) for now
+    create_item_on_todo_list(new_item)
     return redirect('/')
     

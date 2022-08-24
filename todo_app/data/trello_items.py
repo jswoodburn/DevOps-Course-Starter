@@ -18,3 +18,16 @@ def get_lists_on_board():
         'cards': 'open'
     }
     return requests.get(get_board_endpoint, params=params).json()
+
+def create_item_on_todo_list(item_name):
+    create_item_on_list(item_name, todo_list_id)
+
+def create_item_on_list(item_name, list_id):
+    create_item_endpoint = f'{trello_base_url}cards'
+    params = {
+        'key': api_key,
+        'token': api_token,
+        'name': item_name,
+        'idList': list_id
+    }
+    requests.post(create_item_endpoint, params=params).json()
