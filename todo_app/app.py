@@ -24,7 +24,7 @@ def index():
             items_on_board.append(Item.from_trello_card(card, list))
 
     print(list_ids_in_progression_order)
-    return render_template('index.html', column_names=list_names, todos=items_on_board)
+    return render_template('index.html', column_names=list_names, items=items_on_board)
 
 @app.route('/add-todo', methods=[ 'POST'])
 def add_todo_item():
