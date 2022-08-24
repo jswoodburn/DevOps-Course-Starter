@@ -15,6 +15,11 @@
           {% for todo in todos %}
             {% if todo.status == column_name %}
               <li>{{todo.name}}</li>
+              {% if column_name != "Done" %}
+                <form action="{{ url_for('update_item_status', item_id=todo.id, current_list_id=todo.list_id) }}" method="post">
+                  <button type="submit">&#8594</button>
+                </form>
+              {% endif %}
             {% endif %}
           {% endfor %}
         </ul>
@@ -22,7 +27,7 @@
       <h2>Update your To-Do List</h2>
       <form method="POST" action="/add-todo">
           <label>Add a new item</label>
-          <input type="text" name="todo" value=""></input>
+          <input type="text" name="todo" value=""/>
           <button>Submit</button>
       </form>
     </div>
