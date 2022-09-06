@@ -1,7 +1,3 @@
-# DevOps Apprenticeship: Project Exercise
-
-> If you are using GitPod for the project exercise (i.e. you cannot use your local machine) then you'll want to launch a VM using the [following link](https://gitpod.io/#https://github.com/CorndelWithSoftwire/DevOps-Course-Starter). Note this VM comes pre-setup with Python & Poetry pre-installed.
-
 ## System Requirements
 
 The project uses poetry for Python to create an isolated environment and manage package dependencies. To prepare your system, ensure you have an official distribution of Python version 3.7+ and install Poetry using one of the following commands (as instructed by the [poetry documentation](https://python-poetry.org/docs/#system-requirements)):
@@ -32,7 +28,33 @@ You'll also need to clone a new `.env` file from the `.env.template` to store lo
 $ cp .env.template .env  # (first time only)
 ```
 
-The `.env` file is used by flask to set environment variables when running `flask run`. This enables things like development mode (which also enables features like hot reloading when you make a file change). There's also a [SECRET_KEY](https://flask.palletsprojects.com/en/1.1.x/config/#SECRET_KEY) variable which is used to encrypt the flask session cookie.
+The `.env` file is used by flask to set environment variables when running `flask run`. This enables things like development mode (which also enables features like hot reloading when you make a file change).
+
+## Secrets/Environment variables
+
+The To Do app runs off the back of the Trello API. To run the app locally you'll need to modify the values under `# Trello` in the `.env` file. If you have any issues with the below, check out the [`Trello API introduction docs`](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/).
+
+***Remember to ensure that your .env file is listed in your .gitignore - never commit your API key or token to GitHub***
+
+#### TRELLO_API_KEY
+
+You can grab this from [`https://trello.com/app-key`](https://trello.com/app-key) if you're logged in to Trello. It should be at the top of the page as it loads, labelled `Key`.
+
+#### TRELLO_API_TOKEN
+
+On the same page where you found your API key - [`https://trello.com/app-key`](https://trello.com/app-key) - click the hyperlinked "Token" under the API key. Follow the instructions to grant permission to Server Token and get your token.
+
+#### TRELLO_BOARD_ID
+
+On your Trello homepage, i.e. `trello.com/<username>/boards`, navigate to the board you want to edit in the app. Then add `.json` to the url. 
+
+>For example: 
+>
+>`https://trello.com/b/8AAcIEx2/devops-to-do-board` > `https://trello.com/b/8AAcIEx2/devops-to-do-board.json`.
+
+Grab the value of `"id"` in the json that loads. This is the ID of your Trello board.
+
+If you prefer you can also access this json/the ID by using the REST API itself (see the [Board API docs](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-boards-id-memberships-get)).
 
 ## Running the App
 
