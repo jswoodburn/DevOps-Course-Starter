@@ -5,6 +5,7 @@ from todo_app.data.trello_items import create_item_on_todo_list, get_lists_on_bo
 
 from todo_app.flask_config import Config
 from todo_app.item import Item
+from todo_app.view_model import ViewModel
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -23,8 +24,7 @@ def index():
         for card in list['cards']:
             items_on_board.append(Item.from_trello_card(card, list))
 
-    print(list_ids_in_progression_order)
-    return render_template('index.html', column_names=list_names, items=items_on_board)
+    return render_template('index.html', view_model=ViewModel(items_on_board, list_names))
 
 @app.route('/add-todo', methods=[ 'POST'])
 def add_todo_item():
