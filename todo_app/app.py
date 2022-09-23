@@ -23,16 +23,16 @@ def index():
         list_names.append(list['name'])
         list_ids_in_progression_order.append(list['id'])
         for card in list['cards']:
-            if not wasCardCompletedBeforeToday(list, card):
+            if not was_card_completed_before_today(list, card):
                 items_on_board.append(Item.from_trello_card(card, list))
 
     return render_template('index.html', view_model=ViewModel(items_on_board, list_names))
 
-def getDateTimeFromString(dateAsString):
+def get_date_time_from_string(dateAsString):
     return datetime.strptime(dateAsString, "%Y-%m-%dT%H:%M:%S.%fZ").date()
 
-def wasCardCompletedBeforeToday(list, card):
-    return list['name'] == 'Done' and getDateTimeFromString(card['dateLastActivity']) != datetime.today().date()
+def was_card_completed_before_today(list, card):
+    return list['name'] == 'Done' and get_date_time_from_string(card['dateLastActivity']) != datetime.today().date()
 
 @app.route('/add-todo', methods=[ 'POST'])
 def add_todo_item():
