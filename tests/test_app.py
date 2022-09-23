@@ -14,7 +14,7 @@ def client():
     with test_app.test_client() as client:
         yield client
 
-def test_index_page(monkeypatch, client):
+def test_index_page_loads(monkeypatch, client):
     
     # Given
     monkeypatch.setattr(requests, 'get', get_lists_stub)
@@ -25,8 +25,18 @@ def test_index_page(monkeypatch, client):
     # Then
     assert response.status_code == 200
     assert 'Just another to-do app.' in response.data.decode()
-    assert 'Test card' in response.data.decode()
 
+def test_index_page_displays_trello_data(monkeypatch, client):
+    
+    # Given
+    monkeypatch.setattr(requests, 'get', get_lists_stub)
+
+    # When
+    response = client.get('/')
+
+    # Then
+    assert 'Test card' in response.data.decode()
+    
 class StubResponse():
     def __init__(self, fake_response_data):
         self.fake_response_data = fake_response_data
