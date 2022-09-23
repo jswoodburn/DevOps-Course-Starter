@@ -1,8 +1,3 @@
-from typing import List
-
-from todo_app.item import Item
-
-
 class ViewModel:
     def __init__(self, items, column_names):
         self._items = items
