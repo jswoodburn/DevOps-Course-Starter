@@ -15,8 +15,17 @@ def client():
         yield client
 
 def test_index_page(monkeypatch, client):
+    
+    # Given
     monkeypatch.setattr(requests, 'get', get_lists_stub)
+
+    # When
     response = client.get('/')
+
+    # Then
+    assert response.status_code == 200
+    assert 'Just another to-do app.' in response.data.decode()
+    assert 'Test card' in response.data.decode()
 
 class StubResponse():
     def __init__(self, fake_response_data):
