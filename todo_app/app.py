@@ -1,4 +1,5 @@
 from calendar import c
+from datetime import datetime
 from flask import Flask, redirect, render_template, request
 from todo_app.data.session_items import add_item, get_items
 from todo_app.data.trello_items import create_item_on_todo_list, get_lists_on_board, update_item_list_id
@@ -22,9 +23,16 @@ def index():
         list_names.append(list['name'])
         list_ids_in_progression_order.append(list['id'])
         for card in list['cards']:
-            items_on_board.append(Item.from_trello_card(card, list))
+            if not wasCardCompletedBeforeToday(list, card):
+                items_on_board.append(Item.from_trello_card(card, list))
 
     return render_template('index.html', view_model=ViewModel(items_on_board, list_names))
+
+def getDateTimeFromString(dateAsString):
+    return datetime.strptime(dateAsString, "%Y-%m-%dT%H:%M:%S.%fZ").date()
+
+def wasCardCompletedBeforeToday(list, card):
+    return list['name'] == 'Done' and getDateTimeFromString(card['dateLastActivity']) != datetime.today().date()
 
 @app.route('/add-todo', methods=[ 'POST'])
 def add_todo_item():
