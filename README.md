@@ -56,7 +56,7 @@ Grab the value of `"id"` in the json that loads. This is the ID of your Trello b
 
 If you prefer you can also access this json/the ID by using the REST API itself (see the [Board API docs](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-boards-id-memberships-get)).
 
-## Running the App
+## Running the App Locally
 
 Once the all dependencies have been installed, start the Flask app in development mode within the Poetry environment by running:
 ```bash
@@ -74,3 +74,29 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Running the App on a Virtual Machine
+
+To run the app on a virtual machine(s):
+
+1. Update the `todo_inventory` file to contain a list of the IP's of the virtual machines you want to run the app on.
+
+2. Copy the files in the `ansible` directory to your control node. For example, using:
+
+```bash
+$ scp -r <relative_path_to_repo>/ansible/* <user>@<IP>:/home/<user>
+```
+
+3. Then ssh into that control node machine:
+
+```bash
+$ ssh <user>@<IP>
+```
+
+4. From here you should see all the files you've just copied across. You can run the app on all control nodes by running:
+
+```bash
+$ ansible-playbook todo_playbook.yml -i todo_inventory
+```
+
+5. You can check the app is running by visiting `http://<host-VM-IP>:5000` in a browser, replacing the <> section with each host IP address that you want to QC.
