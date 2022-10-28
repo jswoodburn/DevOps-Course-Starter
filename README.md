@@ -56,7 +56,7 @@ Grab the value of `"id"` in the json that loads. This is the ID of your Trello b
 
 If you prefer you can also access this json/the ID by using the REST API itself (see the [Board API docs](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-boards-id-memberships-get)).
 
-## Running the App
+## Running the App Locally
 
 Once the all dependencies have been installed, start the Flask app in development mode within the Poetry environment by running:
 ```bash
