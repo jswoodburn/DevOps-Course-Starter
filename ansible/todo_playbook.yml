@@ -51,7 +51,7 @@
         src: .env.j2
         dest: /opt/todoapp/.env
         owner: ec2-user
-        mode: '0777'
+        mode: '0770'
 
     - name: Copy todoapp.service file to host
       ansible.builtin.copy:
