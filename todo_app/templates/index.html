@@ -9,10 +9,10 @@
 
   <div class="row">
     <div class="col-md-12">
-      {% for column_name in column_names %}
+      {% for column_name in view_model.column_names %}
         <h2>{{column_name}}</h2>
         <ul class="list-group mb-4">
-          {% for item in items %}
+          {% for item in view_model.items %}
             {% if item.status == column_name %}
               <li>{{item.name}}</li>
               {% if column_name != "Done" %}
