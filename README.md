@@ -56,7 +56,7 @@ Grab the value of `"id"` in the json that loads. This is the ID of your Trello b
 
 If you prefer you can also access this json/the ID by using the REST API itself (see the [Board API docs](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-boards-id-memberships-get)).
 
-## Running the App
+## Running the App Locally
 
 Once the all dependencies have been installed, start the Flask app in development mode within the Poetry environment by running:
 ```bash
@@ -84,3 +84,29 @@ Tests can be found in the ```tests/``` directory. To run these tests from the te
 * If you want to run just one file of tests, you can be more specific: ```poetry run pytest tests/test_board.py```
 
 If you want to add tests, be sure to conform to pytest standards and add them in a file that starts with ```test_``` or ends with ```_test``` and name any test function as ```test_<test_name>```.
+
+## Running the App on a Virtual Machine
+
+To run the app on a virtual machine(s):
+
+1. Update the `todo_inventory` file to contain a list of the IP's of the virtual machines you want to run the app on.
+
+2. Copy the files in the `ansible` directory to your control node. For example, using:
+
+```bash
+$ scp -r <relative_path_to_repo>/ansible/* <user>@<IP>:/home/<user>
+```
+
+3. Then ssh into that control node machine:
+
+```bash
+$ ssh <user>@<IP>
+```
+
+4. From here you should see all the files you've just copied across. You can run the app on all control nodes by running:
+
+```bash
+$ ansible-playbook todo_playbook.yml -i todo_inventory
+```
+
+5. You can check the app is running by visiting `http://<host-VM-IP>:5000` in a browser, replacing the <> section with each host IP address that you want to QC.
