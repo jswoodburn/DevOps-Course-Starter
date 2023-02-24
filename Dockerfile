@@ -2,18 +2,19 @@
 FROM python:3.10-buster AS base
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
 
-# Copy across codebase
-COPY todo_app /todo-app/todo_app
-COPY tests /todo-app/tests
-COPY .env.test /todo-app
+# Copy across dependecy management files
+WORKDIR /todo-app
 COPY poetry.lock /todo-app
-COPY poetry.toml /todo-app
 COPY pyproject.toml /todo-app
 
 # Install package dependencies
-    # TODO exercise-5: Figure out how to add poetry to your path from the command line -> ~/.local/share/pypoetry/venv/bin/poetry
-WORKDIR /todo-app
 RUN ~/.local/share/pypoetry/venv/bin/poetry install
+
+# Copy across code
+COPY poetry.toml /todo-app
+COPY todo_app /todo-app/todo_app
+COPY tests /todo-app/tests
+COPY .env.test /todo-app
 
 FROM base AS production
 
