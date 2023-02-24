@@ -75,6 +75,16 @@ You should see output similar to the following:
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
+## Running the Tests
+
+Tests can be found in the ```tests/``` directory. To run these tests from the terminal:
+* Make sure you have pytest installed - if you have run ```poetry install``` then you should already have it as it's a dependency of the project.
+* If you don't think you have pytest installed try running ```poetry add pytest --dev``` from the terminal
+* Now to run the tests, you can stay in the terminal, navigate to the project root, and run ```poetry run pytest tests```. Here ```tests``` refers to the tests directory mentioned above, where all our tests are kept.
+* If you want to run just one file of tests, you can be more specific: ```poetry run pytest tests/test_board.py```
+
+If you want to add tests, be sure to conform to pytest standards and add them in a file that starts with ```test_``` or ends with ```_test``` and name any test function as ```test_<test_name>```.
+
 ## Running the App on a Virtual Machine
 
 To run the app on a virtual machine(s):
