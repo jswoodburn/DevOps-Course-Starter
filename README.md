@@ -110,3 +110,37 @@ $ ansible-playbook todo_playbook.yml -i todo_inventory
 ```
 
 5. You can check the app is running by visiting `http://<host-VM-IP>:5000` in a browser, replacing the <> section with each host IP address that you want to QC.
+
+## Running the app in a Docker container
+
+The app is set up to run in docker in development or production. You can also create an image to run the tests. In all the cases below `-it` can be replaced with `d` to run in detached mode.
+ 
+### Development
+
+Run:
+
+    docker build --target development --tag todo-app:dev .
+
+Then:
+
+    docker run -it --env-file .env --publish 8081:5000 --mount type=bind,source="$(pwd)"/todo_app,target=/todo-app/todo_app todo-app:dev
+
+### Production
+
+Run:
+
+    docker build --target production --tag todo-app:prod .
+
+Then:
+
+    docker run -it --env-file .env --publish 8081:8088 todo-app:prod
+
+### Tests
+
+Run:
+
+    docker build --target tests --tag todo-app:test .
+
+Then:
+
+    docker run -it todo-app:test
