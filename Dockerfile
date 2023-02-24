@@ -25,7 +25,9 @@ FROM base AS development
 
 ENTRYPOINT ~/.local/share/pypoetry/venv/bin/poetry run flask run --host 0.0.0.0
 
+FROM base as tests
 
+ENTRYPOINT ~/.local/share/pypoetry/venv/bin/poetry run pytest tests
 
 
 
@@ -41,6 +43,7 @@ ENTRYPOINT ~/.local/share/pypoetry/venv/bin/poetry run flask run --host 0.0.0.0
 # docker build --target production --tag todo-app:prod .
 # docker run -it --env-file .env --publish 8081:8088 todo-app:prod
 
-
+# docker build --target tests --tag todo-app:test .
+# docker run -it todo-app:test
 
 
