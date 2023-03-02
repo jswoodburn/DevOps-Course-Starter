@@ -1,5 +1,23 @@
 name: Continuous Integration 
-on: [push] 
+on:
+  push:
+    paths-ignore:
+      - README.md
+      - ansible/*
+      - .vscode/*
+      - .venv/*
+      - .pytest_cache/*
+      - '**__pycache__/*'
+      - tests/.pytest_cache/*
+  pull_request:
+    paths-ignore:
+      - README.md
+      - ansible/*
+      - .vscode/*
+      - .venv/*
+      - .pytest_cache/*
+      - '**__pycache__/*'
+      - tests/.pytest_cache/*
 jobs: 
   build: 
     name: Build and test 
