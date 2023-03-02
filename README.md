@@ -144,5 +144,3 @@ Run:
 Then:
 
     docker run -it todo-app:test
-
-This is a test that build doesn't run if only change is in README.
