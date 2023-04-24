@@ -28,11 +28,11 @@ jobs:
       run: docker build --target tests --tag todo-app:test .
     - name: Run tests in Docker
       run: docker run todo-app:test
-  docker_publish:
-    name: Push Docker image to Docker Hub
+  deploy:
+    name: Update Docker image and deploy
     runs-on: ubuntu-latest
     needs: test
-    if: (github.ref == 'refs/heads/master') && (github.event_name == 'push')
+    if: (github.ref == 'refs/heads/exercise-9') && (github.event_name == 'push') # TODO exercise-9: change back to master once done testing
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -46,7 +46,12 @@ jobs:
       - name: Build prod docker image
         run: docker build --target production --tag ${{ secrets.DOCKER_USERNAME }}/todo-app:$GITHUB_SHA .
       
-      - name: Push prod docker image to Docker Hub
+      - name: Push image to Docker Hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/todo-app:$GITHUB_SHA
 
       - run: echo "Pushed production image with tag ${{ secrets.DOCKER_USERNAME }}/todo-app:$GITHUB_SHA to Docker"
+
+      - name: Deploy updated image to Azure
+        run: curl -dH -X POST ${{ secrets.DEPLOY_WEBHOOK }}
+
+      - run: echo "Deployment initiated"

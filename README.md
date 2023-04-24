@@ -148,7 +148,7 @@ Then:
 
 ## Deploying production Docker image
 
-The Docker image produced by the `publish-docker-image.yml` file can be found [here](https://hub.docker.com/repository/docker/jackiew104/todo-app/general). This is the same image used in the Azure Web App.
+The Docker image produced by the `publish-docker-image.yml` file can be found [here](https://hub.docker.com/r/jackiew104/todo-app). This is the same image used in the Azure Web App.
 
 When the container image has a new version, you can prompt the app to pull it and restart by following the steps below:
 1. In the [Azure Portal](https://portal.azure.com/) navigate to the Deployment Center of the To Do Web App (<Resource Group> | <App Service> | Deployment Center).
@@ -157,3 +157,7 @@ When the container image has a new version, you can prompt the app to pull it an
     ```
     curl -dH -X POST "<webhook>"
     ```
+
+## Live site
+
+The site is hosted on Azure, and should be updated/redeployed when changes are pushed to `master`. The site can be found [here](https://jsw-todo-app.azurewebsites.net/).
