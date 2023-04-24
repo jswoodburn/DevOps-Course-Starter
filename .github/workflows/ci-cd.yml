@@ -43,13 +43,19 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       
-      - name: Build prod docker image
+      - name: Build versioned docker image
         run: docker build --target production --tag ${{ secrets.DOCKER_USERNAME }}/todo-app:$GITHUB_SHA .
-      
-      - name: Push image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/todo-app:$GITHUB_SHA
 
-      - run: echo "Pushed production image with tag ${{ secrets.DOCKER_USERNAME }}/todo-app:$GITHUB_SHA to Docker"
+      - name: Build prod docker image
+        run: docker build --target production --tag ${{ secrets.DOCKER_USERNAME }}/todo-app:prod .
+      
+      - name: Push versioned image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/todo-app:$GITHUB_SHA
+      
+      - name: Push prod image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/todo-app:prod
+
+      - run: echo "Pushed versioned image with tag ${{ secrets.DOCKER_USERNAME }}/todo-app:$GITHUB_SHA and production image to Docker"
 
       - name: Deploy updated image to Azure
         run: curl -dH -X POST ${{ secrets.DEPLOY_WEBHOOK }}
