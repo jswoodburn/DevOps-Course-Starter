@@ -1,7 +1,11 @@
+from todo_app.data.to_do_state import ToDoState
+
 class ViewModel:
-    def __init__(self, items, column_names):
+    
+
+    def __init__(self, items):
         self._items = items
-        self._column_names = column_names
+        self._column_names = ToDoState().get_lists_to_display()
 
     @property
     def items(self):
@@ -15,7 +19,7 @@ class ViewModel:
     def todo_items(self):
         todo_items = []
         for item in self._items:
-            if item.status == 'To Do':
+            if item.status == ToDoState().TO_DO:
                 todo_items.append(item)
         return todo_items
 
@@ -23,7 +27,7 @@ class ViewModel:
     def doing_items(self):
         doing_items = []
         for item in self._items:
-            if item.status == 'Doing':
+            if item.status == ToDoState().DOING:
                 doing_items.append(item)
         return doing_items
 
@@ -31,6 +35,6 @@ class ViewModel:
     def done_items(self):
         done_items = []
         for item in self._items:
-            if item.status == 'Done':
+            if item.status == ToDoState().DONE:
                 done_items.append(item)
         return done_items

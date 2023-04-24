@@ -7,6 +7,7 @@ from todo_app.data.trello_items import create_item_on_todo_list, get_lists_on_bo
 from todo_app.flask_config import Config
 from todo_app.item import Item
 from todo_app.view_model import ViewModel
+from todo_app.data.to_do_state import ToDoState
 
 def create_app():
     app = Flask(__name__)
@@ -16,18 +17,11 @@ def create_app():
 
     @app.route('/')
     def index():
-        lists_on_board = get_lists_on_board()
-        list_names = []
         items_on_board = []
 
-        for list in lists_on_board:
-            list_names.append(list['name'])
-            list_ids_in_progression_order.append(list['id'])
-            for card in list['cards']:
-                if not was_card_completed_before_today(list, card):
-                    items_on_board.append(Item.from_trello_card(card, list))
+        # TODO exercise-10: Add step to filter out completed items that were completed before today.
 
-        return render_template('index.html', view_model=ViewModel(items_on_board, list_names))
+        return render_template('index.html', view_model=ViewModel(items_on_board))
 
     def get_date_time_from_string(dateAsString):
         return datetime.strptime(dateAsString, "%Y-%m-%dT%H:%M:%S.%fZ").date()
