@@ -1,11 +1,9 @@
 from calendar import c
 from datetime import datetime
 from flask import Flask, redirect, render_template, request
-from todo_app.data.session_items import add_item, get_items
-from todo_app.data.trello_items import create_item_on_todo_list, get_lists_on_board, update_item_list_id
+from todo_app.data.item_repository import create_item_on_todo_list, update_item_list_id, get_items_on_board
 
 from todo_app.flask_config import Config
-from todo_app.item import Item
 from todo_app.view_model import ViewModel
 from todo_app.data.to_do_state import ToDoState
 
@@ -17,7 +15,7 @@ def create_app():
 
     @app.route('/')
     def index():
-        items_on_board = []
+        items_on_board = get_items_on_board()
 
         # TODO exercise-10: Add step to filter out completed items that were completed before today.
 
