@@ -144,3 +144,16 @@ Run:
 Then:
 
     docker run -it todo-app:test
+
+
+## Deploying production Docker image
+
+The Docker image produced by the `publish-docker-image.yml` file can be found [here](https://hub.docker.com/repository/docker/jackiew104/todo-app/general). This is the same image used in the Azure Web App.
+
+When the container image has a new version, you can prompt the app to pull it and restart by following the steps below:
+1. In the [Azure Portal](https://portal.azure.com/) navigate to the Deployment Center of the To Do Web App (<Resource Group> | <App Service> | Deployment Center).
+2. Copy the `Webhook URL`.
+3. In a terminal, run the command below, ensuring that you first _escape the `$` in the webhook_ using a backslash.
+    ```
+    curl -dH -X POST "<webhook>"
+    ```
