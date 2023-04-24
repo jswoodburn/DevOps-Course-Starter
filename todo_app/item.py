@@ -6,4 +6,4 @@ class Item:
 
     @classmethod
     def from_document(cls, doc):
-        return cls(doc['id'], doc['name'], doc['status'])
+        return cls(doc['_id'], doc['name'], doc['status'])

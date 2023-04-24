@@ -1,7 +1,7 @@
 from todo_app.data.to_do_state import ToDoState
 
 class ViewModel:
-    
+    # TODO exercise-10: current "enum" approach is instantiating a lot of ToDoState()'s (same is true in other files too)
 
     def __init__(self, items):
         self._items = items
