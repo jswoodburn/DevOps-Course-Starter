@@ -36,6 +36,7 @@ The To Do app runs off the back of the Trello API. To run the app locally you'll
 
 ***Remember to ensure that your .env file is listed in your .gitignore - never commit your API key or token to GitHub***
 
+<!-- TODO exercise-10: make sure to remove references to Trello from README -->
 #### TRELLO_API_KEY
 
 You can grab this from [`https://trello.com/app-key`](https://trello.com/app-key) if you're logged in to Trello. It should be at the top of the page as it loads, labelled `Key`.

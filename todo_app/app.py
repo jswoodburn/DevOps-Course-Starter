@@ -34,6 +34,7 @@ def create_app():
         create_item_on_todo_list(new_item)
         return redirect('/')
 
+    # TODO exercise-10: rename current list id to be current status
     @app.route('/update-item-status/<item_id>/<current_list_id>', methods=[ 'POST'])
     def update_item_status(item_id, current_list_id):
         new_list_id = _get_next_list_id(current_list_id)
@@ -41,11 +42,12 @@ def create_app():
         return redirect('/')
 
     def _get_next_list_id(current_list_id):
-        current_index = list_ids_in_progression_order.index(current_list_id)
-        next_index = current_index + 1
-        if next_index > (len(list_ids_in_progression_order) - 1):
-            # TODO exercise-2: Should probably throw an error here, they shouldn't be able to click next on a Done item
-            return current_list_id
-        return list_ids_in_progression_order[next_index]
+        if current_list_id == ToDoState.TO_DO:
+            return ToDoState.DOING
+        
+        if current_list_id == ToDoState.DOING:
+            return ToDoState.DONE
+        
+        raise Exception("Item state does not have a successor")
 
     return app

@@ -16,7 +16,7 @@
             {% if item.status == column_name %}
               <li>{{item.name}}</li>
               {% if column_name != "Done" %}
-                <form action="{{ url_for('update_item_status', item_id=item.id, current_list_id=item.list_id) }}" method="post">
+                <form action="{{ url_for('update_item_status', item_id=item.id, current_list_id=item.status) }}" method="post">
                   <button type="submit">&#8594</button>
                 </form>
               {% endif %}
