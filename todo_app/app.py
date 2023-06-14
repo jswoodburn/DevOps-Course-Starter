@@ -1,8 +1,9 @@
 from calendar import c
-from datetime import datetime
+from datetime import date
 from flask import Flask, redirect, render_template, request
 from todo_app.data.item_repository import create_item_on_todo_list, update_item_list_id, get_items_on_board
 
+from todo_app.item import Item
 from todo_app.flask_config import Config
 from todo_app.view_model import ViewModel
 from todo_app.data.to_do_state import ToDoState
@@ -16,36 +17,31 @@ def create_app():
     @app.route('/')
     def index():
         items_on_board = get_items_on_board()
+        valid_items_to_display = list(filter(_was_item_completed_before_today, items_on_board))
 
-        # TODO exercise-10: Add step to filter out completed items that were completed before today.
+        return render_template('index.html', view_model=ViewModel(valid_items_to_display))
 
-        return render_template('index.html', view_model=ViewModel(items_on_board))
+    def _was_item_completed_before_today(item: Item) -> bool:
+        return not (item.status == ToDoState.DONE and item.last_edited.date() < date.today())
 
-    def get_date_time_from_string(dateAsString):
-        return datetime.strptime(dateAsString, "%Y-%m-%dT%H:%M:%S.%fZ").date()
-
-    # TODO exercise-3: Did this before reading stretch goal. Come back and do this with TDD and view model if time.
-    def was_card_completed_before_today(list, card):
-        return list['name'] == 'Done' and get_date_time_from_string(card['dateLastActivity']) != datetime.today().date()
-
-    @app.route('/add-todo', methods=[ 'POST'])
+    @app.route('/add-todo', methods=['POST'])
     def add_todo_item():
         new_item = request.form.get('todo')
         create_item_on_todo_list(new_item)
         return redirect('/')
 
     # TODO exercise-10: rename current list id to be current status
-    @app.route('/update-item-status/<item_id>/<current_list_id>', methods=[ 'POST'])
-    def update_item_status(item_id, current_list_id):
-        new_list_id = _get_next_list_id(current_list_id)
-        update_item_list_id(item_id, new_list_id)
+    @app.route('/update-item-status/<item_id>/<current_status>', methods=['POST'])
+    def update_item_status(item_id: str, current_status: ToDoState) -> None:
+        updated_status = _get_next_status(current_status)
+        update_item_list_id(item_id, updated_status)
         return redirect('/')
 
-    def _get_next_list_id(current_list_id):
-        if current_list_id == ToDoState.TO_DO:
+    def _get_next_status(current_status: ToDoState) -> ToDoState:
+        if current_status == ToDoState.TO_DO:
             return ToDoState.DOING
         
-        if current_list_id == ToDoState.DOING:
+        if current_status == ToDoState.DOING:
             return ToDoState.DONE
         
         raise Exception("Item state does not have a successor")
