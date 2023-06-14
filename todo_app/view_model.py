@@ -1,40 +1,34 @@
 from todo_app.data.to_do_state import ToDoState
+from todo_app.item import Item
+from typing import List
 
 class ViewModel:
-    # TODO exercise-10: current "enum" approach is instantiating a lot of ToDoState()'s (same is true in other files too)
-
     def __init__(self, items):
-        self._items = items
-        self._column_names = ToDoState().get_lists_to_display()
+        self._items: List[Item] = items
+        self._column_names = ToDoState.get_lists_to_display()
 
     @property
-    def items(self):
+    def items(self) -> List[Item]:
         return self._items
     
     @property
-    def column_names(self):
+    def column_names(self) -> List[ToDoState]:
         return self._column_names
 
     @property
-    def todo_items(self):
-        todo_items = []
-        for item in self._items:
-            if item.status == ToDoState().TO_DO:
-                todo_items.append(item)
+    def todo_items(self) -> List[Item]:
+        todo_items = list(filter(lambda item: item.status == ToDoState.TO_DO, self._items))
+        todo_items.sort(key=lambda item: item.last_edited)
         return todo_items
 
     @property
-    def doing_items(self):
-        doing_items = []
-        for item in self._items:
-            if item.status == ToDoState().DOING:
-                doing_items.append(item)
+    def doing_items(self) -> List[Item]:
+        doing_items = list(filter(lambda item: item.status == ToDoState.DOING, self._items))
+        doing_items.sort(key=lambda item: item.last_edited)
         return doing_items
 
     @property
-    def done_items(self):
-        done_items = []
-        for item in self._items:
-            if item.status == ToDoState().DONE:
-                done_items.append(item)
+    def done_items(self) -> List[Item]:
+        done_items = list(filter(lambda item: item.status == ToDoState.DONE, self._items))
+        done_items.sort(key=lambda item: item.last_edited)
         return done_items

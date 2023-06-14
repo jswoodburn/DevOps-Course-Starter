@@ -14,7 +14,7 @@ def get_items_on_board() -> List[Item]:
     return [Item.from_document(document) for document in raw_items]
 
 def create_item_on_todo_list(item_name: str) -> None:
-    create_item_on_list(item_name, ToDoState().TO_DO)
+    create_item_on_list(item_name, ToDoState.TO_DO)
 
 def create_item_on_list(item_name: str, status: ToDoState) -> None:
     item = {

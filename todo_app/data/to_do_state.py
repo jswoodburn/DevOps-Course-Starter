@@ -3,8 +3,9 @@ class ToDoState():
     DOING = "Doing"
     DONE = "Done"
 
-    def get_lists_to_display(self):
-        return self.TO_DO, self.DOING, self.DONE
+    @staticmethod
+    def get_lists_to_display():
+        return ToDoState.TO_DO, ToDoState.DOING, ToDoState.DONE
     
     def __call__(self, *args):
         return self.value(*args)
