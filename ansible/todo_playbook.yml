@@ -3,15 +3,15 @@
   remote_user: ec2-user
       
   vars_prompt: 
-    - name: trello_key
-      prompt: Enter Trello API key
-      private: no
-
-    - name: trello_token
-      prompt: Enter Trello API token
-
     - name: secret_key
       prompt: Enter secret key
+
+    - name: connection_string
+      prompt: Enter connection string
+
+    - name: db_name
+      prompt: Enter database name
+      private: no
 
   tasks:
     - name: Install Git and Python3

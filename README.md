@@ -32,30 +32,9 @@ The `.env` file is used by flask to set environment variables when running `flas
 
 ## Secrets/Environment variables
 
-The To Do app runs off the back of the Trello API. To run the app locally you'll need to modify the values under `# Trello` in the `.env` file. If you have any issues with the below, check out the [`Trello API introduction docs`](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/).
+To run the app locally you'll need to modify the values in the `.env` file. In particular you'll need to ensure you can connect to an Azure Cosmos DB instance by entering your `COSMOS_CONNECTION_STRING` and `COSMOS_DB_NAME`. More information can be found in the [Azure documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/connect-account)
 
 ***Remember to ensure that your .env file is listed in your .gitignore - never commit your API key or token to GitHub***
-
-<!-- TODO exercise-10: make sure to remove references to Trello from README -->
-#### TRELLO_API_KEY
-
-You can grab this from [`https://trello.com/app-key`](https://trello.com/app-key) if you're logged in to Trello. It should be at the top of the page as it loads, labelled `Key`.
-
-#### TRELLO_API_TOKEN
-
-On the same page where you found your API key - [`https://trello.com/app-key`](https://trello.com/app-key) - click the hyperlinked "Token" under the API key. Follow the instructions to grant permission to Server Token and get your token.
-
-#### TRELLO_BOARD_ID
-
-On your Trello homepage, i.e. `trello.com/<username>/boards`, navigate to the board you want to edit in the app. Then add `.json` to the url. 
-
->For example: 
->
->`https://trello.com/b/8AAcIEx2/devops-to-do-board` > `https://trello.com/b/8AAcIEx2/devops-to-do-board.json`.
-
-Grab the value of `"id"` in the json that loads. This is the ID of your Trello board.
-
-If you prefer you can also access this json/the ID by using the REST API itself (see the [Board API docs](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-boards-id-memberships-get)).
 
 ## Running the App Locally
 

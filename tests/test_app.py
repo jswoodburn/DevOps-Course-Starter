@@ -34,7 +34,7 @@ def test_index_page_loads(client):
     assert response.status_code == 200
     assert 'Just another to-do app.' in response.data.decode()
 
-def test_index_page_displays_trello_data(client):
+def test_index_page_displays_data(client):
     # Given
     config = MongoDbConfig()
 
