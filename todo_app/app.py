@@ -32,7 +32,6 @@ def create_app():
         database.create_item_on_todo_list(new_item)
         return redirect('/')
 
-    # TODO exercise-10: rename current list id to be current status
     @app.route('/update-item-status/<item_id>/<current_status>', methods=['POST'])
     def update_item_status(item_id: str, current_status: ToDoState) -> None:
         updated_status = _get_next_status(current_status)
