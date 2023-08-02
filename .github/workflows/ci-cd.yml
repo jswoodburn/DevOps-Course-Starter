@@ -28,10 +28,20 @@ jobs:
       run: docker build --target tests --tag todo-app:test .
     - name: Run tests in Docker
       run: docker run todo-app:test
+  dependency-scan: 
+    name: Check dependencies for vulnerabilities
+    runs-on: ubuntu-latest 
+    steps: 
+    - uses: actions/checkout@v2 
+    - name: Build Docker dependency scan image
+      run: docker build --target dependency-scan --tag todo-app:dependencies .
+    - name: Run dependency scan
+      run: docker run todo-app:dependencies
+      continue-on-error: true
   deploy:
     name: Update Docker image and deploy
     runs-on: ubuntu-latest
-    needs: test
+    needs: [test, dependency-scan]
     if: (github.ref == 'refs/heads/master') && (github.event_name == 'push')
     steps:
       - name: Check out the repo

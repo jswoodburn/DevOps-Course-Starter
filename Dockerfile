@@ -29,3 +29,7 @@ ENTRYPOINT ~/.local/share/pypoetry/venv/bin/poetry run flask run --host 0.0.0.0
 FROM base as tests
 
 ENTRYPOINT ~/.local/share/pypoetry/venv/bin/poetry run pytest tests
+
+FROM base as dependency-scan
+
+ENTRYPOINT ~/.local/share/pypoetry/venv/bin/poetry run safety check
