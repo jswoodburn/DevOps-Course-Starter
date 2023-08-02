@@ -7,3 +7,6 @@ ansible/*
 .env.template
 .gitignore
 .gitpod.yml
+.terraform/*
+.terraform.lock.hcl
+terraform.tfstate
