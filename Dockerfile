@@ -1,6 +1,6 @@
 # Install system dependencies
 FROM python:3.10-buster AS base
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+RUN curl -sSL https://install.python-poetry.org/ | python -
 
 # Copy across dependecy management files
 WORKDIR /todo-app

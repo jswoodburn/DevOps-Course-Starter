@@ -12,16 +12,25 @@
       {% for column_name in view_model.column_names %}
         <h2>{{column_name}}</h2>
         <ul class="list-group mb-4">
-          {% for item in view_model.items %}
-            {% if item.status == column_name %}
+          {% if column_name == "To Do" %}
+            {% for item in view_model.todo_items %}
               <li>{{item.name}}</li>
-              {% if column_name != "Done" %}
-                <form action="{{ url_for('update_item_status', item_id=item.id, current_list_id=item.list_id) }}" method="post">
+                <form action="{{ url_for('update_item_status', item_id=item.id, current_status=item.status) }}" method="post">
                   <button type="submit">&#8594</button>
                 </form>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
+            {% endfor %}
+          {% elif column_name == "Doing" %}
+            {% for item in view_model.doing_items %}
+              <li>{{item.name}}</li>
+              <form action="{{ url_for('update_item_status', item_id=item.id, current_status=item.status) }}" method="post">
+                <button type="submit">&#8594</button>
+              </form>
+            {% endfor %}
+          {% elif column_name == "Done" %}
+            {% for item in view_model.done_items %}
+              <li>{{item.name}}</li>
+            {% endfor %}
+          {% endif %}
         </ul>
       {% endfor %}
       <h2>Update your To-Do List</h2>
