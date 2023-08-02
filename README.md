@@ -30,6 +30,14 @@ $ cp .env.template .env  # (first time only)
 
 The `.env` file is used by flask to set environment variables when running `flask run`. This enables things like development mode (which also enables features like hot reloading when you make a file change).
 
+## Data encryption
+
+The app stores data in an Azure Cosmos DB instance. All databases and backups are therefore encrypted at rest. Further details can be found in the [Azure documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/database-encryption-at-rest).
+
+When setting up a Web App in Azure, it should also be ensured that:
+- Encryption in-transit is enforced by configuring the settings to redirect all HTTP traffic to HTTPS
+- `ssl=true` is included as a query parameter in the CosmosDB connection string to ensure that traffic between the web app and DB is encrypted in-transit. 
+
 ## Secrets/Environment variables
 
 To run the app locally you'll need to modify the values in the `.env` file. In particular you'll need to ensure you can connect to an Azure Cosmos DB instance by entering your `COSMOS_CONNECTION_STRING` and `COSMOS_DB_NAME`. More information can be found in the [Azure documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/connect-account)
