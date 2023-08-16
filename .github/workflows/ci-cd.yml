@@ -48,10 +48,6 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-
-      TF_VAR_PREFIX: ${{ vars.TF_VAR_PREFIX }}
-      TF_VAR_FLASK_ENV: ${{ vars.TF_VAR_FLASK_ENV }}
-      TF_VAR_FLASK_SECRET_KEY: ${{ secrets.TF_VAR_FLASK_SECRET_KEY }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -80,7 +76,7 @@ jobs:
         run: terraform init
 
       - name: Apply Terraform config
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var prefix=${{ vars.TF_VAR_PREFIX }} -var flask_env=${{ vars.TF_VAR_FLASK_ENV }} -var flask_secret_key=${{ secrets.TF_VAR_FLASK_SECRET_KEY }}
 
       - run: echo "Infrastructure provisioned"
 
