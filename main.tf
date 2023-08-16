@@ -5,6 +5,13 @@ terraform {
       version = ">= 3.8"
     }
   }
+
+  backend "azurerm" {
+        resource_group_name  = "Cohort25_JacWoo_ProjectExercise"
+        storage_account_name = "jacwooterraformstate"
+        container_name       = "state"
+        key                  = "terraform.tfstate"
+    }
 }
 
 provider "azurerm" {
@@ -53,9 +60,9 @@ resource "azurerm_cosmosdb_account" "main" {
   offer_type          = "Standard"
   kind                = "MongoDB"
   
-#   lifecycle { 
-#     prevent_destroy = true 
-#   }
+  # lifecycle { 
+  #   prevent_destroy = true 
+  # }
 
   capabilities {
     name = "EnableServerless"
