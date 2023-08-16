@@ -7,11 +7,11 @@ terraform {
   }
 
   backend "azurerm" {
-        resource_group_name  = "Cohort25_JacWoo_ProjectExercise"
-        storage_account_name = "jacwooterraformstate"
-        container_name       = "state"
-        key                  = "terraform.tfstate"
-    }
+    resource_group_name  = "Cohort25_JacWoo_ProjectExercise"
+    storage_account_name = "jacwooterraformstate"
+    container_name       = "state"
+    key                  = "terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
@@ -87,7 +87,7 @@ resource "azurerm_cosmosdb_account" "main" {
 }
 
 resource "azurerm_cosmosdb_mongo_database" "main" {
-  name                = "${var.prefix}-terraformed-db"  # TODO exercise-12: make this rely on env variables
+  name                = "${var.prefix}-terraformed-db"
   resource_group_name = data.azurerm_resource_group.main.name
   account_name        = azurerm_cosmosdb_account.main.name
 }
