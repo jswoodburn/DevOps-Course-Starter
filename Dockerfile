@@ -1,5 +1,5 @@
 # Install system dependencies
-FROM python:3.10-buster AS base
+FROM python:3.10-buster AS framework
 RUN curl -sSL https://install.python-poetry.org/ | python -
 
 # Copy across dependecy management files
@@ -9,6 +9,8 @@ COPY pyproject.toml /todo-app
 
 # Install package dependencies
 RUN ~/.local/share/pypoetry/venv/bin/poetry install
+
+FROM framework as base
 
 # Copy across code
 COPY poetry.toml /todo-app
@@ -29,3 +31,7 @@ ENTRYPOINT ~/.local/share/pypoetry/venv/bin/poetry run flask run --host 0.0.0.0
 FROM base as tests
 
 ENTRYPOINT ~/.local/share/pypoetry/venv/bin/poetry run pytest tests
+
+FROM framework as dependency-scan
+
+ENTRYPOINT ~/.local/share/pypoetry/venv/bin/poetry run safety check
