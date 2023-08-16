@@ -46,8 +46,8 @@ resource "azurerm_linux_web_app" "main" {
   app_settings = {
     "DOCKER_REGISTRY_SERVER_URL" = "https://index.docker.io"
     "FLASK_APP" = "todo_app/app"
-    "FLASK_ENV" = var.flask-env
-    "SECRET_KEY" = var.flask-secret-key
+    "FLASK_ENV" = var.flask_env
+    "SECRET_KEY" = var.flask_secret_key
     "COSMOS_CONNECTION_STRING" = azurerm_cosmosdb_account.main.connection_strings[0]
     "COSMOS_DB_NAME" = azurerm_cosmosdb_mongo_database.main.name
   }
