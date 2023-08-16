@@ -81,6 +81,6 @@ jobs:
       - run: echo "Infrastructure provisioned"
 
       - name: Deploy updated image to Azure
-        run: curl -dH -X POST "$(terraform output -raw webhook-url)
+        run: curl -dH -X POST "$(terraform output -raw webhook-url)"
 
       - run: echo "Deployment initiated"
