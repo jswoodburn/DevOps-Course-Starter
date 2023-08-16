@@ -133,8 +133,9 @@ Then:
 
     docker run -it todo-app:test
 
+## Deployment
 
-## Deploying production Docker image
+### Manually deploying production Docker image
 
 The Docker image produced by the `publish-docker-image.yml` file can be found [here](https://hub.docker.com/r/jackiew104/todo-app). This is the same image used in the Azure Web App.
 
@@ -145,6 +146,20 @@ When the container image has a new version, you can prompt the app to pull it an
     ```
     curl -dH -X POST "<webhook>"
     ```
+
+### Pipeline
+The CI/CD pipeline is configured from the file at `.github/workflows/ci-cd.yml`. This includes steps to deploy the webapp and necessary infrastructure when changes are pushed to the `master` branch.
+
+#### Provisioning infrastructure
+The necessary Azure infrastructure is defined in the `main.tf` terraform file. This includes: 
+- an App Service Plan;
+- the Azure WebApp;
+- and a CosmosDB account and Mongo database.
+
+Terraform state is stored in a manually provisioned storage container in the resource group.
+
+#### Code deployment
+As described in the Manual section above, the webhook can be called automatically to deploy the code to Azure. Since the webhook URL has the potential to change as different infrastructure is provisioned, it is outputted automatically from the `terraform apply` step in the pipeline (as instructed in `outputs.tf`). This webhook is then used for the pipeline to initiate the deployment from a Docker image.
 
 ## Live site
 
