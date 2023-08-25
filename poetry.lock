@@ -220,6 +220,20 @@ MarkupSafe = ">=2.0"
 i18n = ["Babel (>=2.7)"]
 
 [[package]]
+name = "loggly-python-handler"
+version = "1.0.1"
+description = "Python logging handler that sends messages to Loggly"
+optional = false
+python-versions = "*"
+files = [
+    {file = "loggly-python-handler-1.0.1.tar.gz", hash = "sha256:adce302d21fbc5b9647a01067243fb549e9992bfe5ab09807b8fad56c9411995"},
+    {file = "loggly_python_handler-1.0.1-py3-none-any.whl", hash = "sha256:0a4a826adb31ffeb76dac7ca116ccb032ed923254244160e70ddd2c3e88df4fd"},
+]
+
+[package.dependencies]
+requests-futures = ">=1.0.0"
+
+[[package]]
 name = "markupsafe"
 version = "2.1.1"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -494,6 +508,23 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
+name = "requests-futures"
+version = "1.0.1"
+description = "Asynchronous Python HTTP for Humans."
+optional = false
+python-versions = "*"
+files = [
+    {file = "requests-futures-1.0.1.tar.gz", hash = "sha256:f55a4ef80070e2858e7d1e73123d2bfaeaf25b93fd34384d8ddf148e2b676373"},
+    {file = "requests_futures-1.0.1-py2.py3-none-any.whl", hash = "sha256:4a2f5472e9911a79532137d156aa937cd9cd90fec55677f71b2976d1f7a66d38"},
+]
+
+[package.dependencies]
+requests = ">=1.2.0"
+
+[package.extras]
+dev = ["black (>=22.3.0)", "build (>=0.7.0)", "isort (>=5.11.4)", "pyflakes (>=2.2.0)", "pytest (>=6.2.5)", "pytest-cov (>=3.0.0)", "pytest-network (>=0.0.1)", "readme-renderer[rst] (>=26.0)", "twine (>=3.4.2)"]
+
+[[package]]
 name = "ruamel-yaml"
 version = "0.17.32"
 description = "ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"
@@ -679,4 +710,4 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "2253d20a1497f7383b960950c654e37088d0101edac1173f886db5cd9a076629"
+content-hash = "b09316a98c885e47ebe51a0a1d374b96fe0eeec5aced1d80d28c48b72ad79166"

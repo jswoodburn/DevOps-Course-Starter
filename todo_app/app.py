@@ -16,7 +16,7 @@ def create_app():
     
     flask_config = FlaskConfig()
     app.config.from_object(flask_config)
-    configure_logs(flask_config)
+    configure_logs(flask_config)        
 
     database = DatabaseRepository()
 
