@@ -3,9 +3,9 @@ from datetime import date
 from flask import Flask, redirect, render_template, request
 
 from todo_app.data.database_repository import DatabaseRepository
-from todo_app.item import Item
-from todo_app.flask_config import FlaskConfig
-from todo_app.view_model import ViewModel
+from todo_app.models.item import Item
+from todo_app.config.flask_config import FlaskConfig
+from todo_app.models.view_model import ViewModel
 from todo_app.data.to_do_state import ToDoState
 
 def create_app():
@@ -13,8 +13,6 @@ def create_app():
     app.config.from_object(FlaskConfig())
     
     database = DatabaseRepository()
-
-    list_ids_in_progression_order = []
 
     @app.route('/')
     def index():

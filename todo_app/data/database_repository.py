@@ -1,11 +1,11 @@
 import os
 import pymongo 
-from todo_app.item import Item
+from todo_app.models.item import Item
 from todo_app.data.to_do_state import ToDoState
 from datetime import datetime
 from typing import List
 
-from todo_app.mongo_db_config import MongoDbConfig
+from todo_app.config.mongo_db_config import MongoDbConfig
 
 class DatabaseRepository:
     def __init__(self):

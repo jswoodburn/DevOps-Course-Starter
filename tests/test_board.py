@@ -1,5 +1,5 @@
-from todo_app.view_model import ViewModel
-from todo_app.item import Item
+from todo_app.models.view_model import ViewModel
+from todo_app.models.item import Item
 from todo_app.data.to_do_state import ToDoState
 
 from datetime import datetime, timedelta
