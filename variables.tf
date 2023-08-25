@@ -14,3 +14,8 @@ variable "flask_secret_key" {
 variable "log_level" {
   description = "Default Flask logging level"
 }
+
+variable "loggly_token" {
+  description = "Loggly token"
+  sensitive = true
+}

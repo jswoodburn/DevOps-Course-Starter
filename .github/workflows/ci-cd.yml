@@ -76,7 +76,7 @@ jobs:
         run: terraform init
 
       - name: Apply Terraform config
-        run: terraform apply -auto-approve -var prefix=${{ vars.TF_VAR_PREFIX }} -var flask_env=${{ vars.TF_VAR_FLASK_ENV }} -var flask_secret_key=${{ secrets.TF_VAR_FLASK_SECRET_KEY }} -var log_level=${{ vars.TF_VAR_LOG_LEVEL }}
+        run: terraform apply -auto-approve -var prefix=${{ vars.TF_VAR_PREFIX }} -var flask_env=${{ vars.TF_VAR_FLASK_ENV }} -var flask_secret_key=${{ secrets.TF_VAR_FLASK_SECRET_KEY }} -var log_level=${{ vars.TF_VAR_LOG_LEVEL }} -var loggly_token=${{ secrets.TF_VAR_LOGGLY_TOKEN }}
 
       - run: echo "Infrastructure provisioned"
 

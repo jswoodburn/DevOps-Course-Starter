@@ -50,6 +50,7 @@ resource "azurerm_linux_web_app" "main" {
     "COSMOS_CONNECTION_STRING" = azurerm_cosmosdb_account.main.connection_strings[0]
     "COSMOS_DB_NAME" = azurerm_cosmosdb_mongo_database.main.name
     "DEFAULT_LOG_LEVEL" = var.log_level
+    "LOGGLY_TOKEN" = var.loggly_token
   }
 }
 
