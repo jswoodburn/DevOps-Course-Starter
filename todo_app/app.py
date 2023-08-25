@@ -11,12 +11,13 @@ from todo_app.utility.logging_utility import configure_logs
 import logging
 
 
-configure_logs()
-
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(FlaskConfig())
     
+    flask_config = FlaskConfig()
+    app.config.from_object(flask_config)
+    configure_logs(flask_config)
+
     database = DatabaseRepository()
 
     @app.route('/')

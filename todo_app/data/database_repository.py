@@ -6,10 +6,7 @@ from datetime import datetime
 from typing import List
 import logging
 from todo_app.config.mongo_db_config import MongoDbConfig
-from todo_app.utility.logging_utility import configure_logs
 
-
-configure_logs()
 
 class DatabaseRepository:
     def __init__(self):

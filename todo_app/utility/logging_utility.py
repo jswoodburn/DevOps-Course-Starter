@@ -1,8 +1,8 @@
 import logging
 
+from todo_app.config.flask_config import FlaskConfig
 
-def configure_logs():
+
+def configure_logs(config: FlaskConfig):
     # Apply global logging configuration.
-    # Run this at the root of every function.
-
-    logging.getLogger("azure_todo_app").setLevel(logging.WARNING)
+    logging.getLogger("azure_todo_app").setLevel(config.DEFAULT_LOG_LEVEL)
