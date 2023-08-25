@@ -1,6 +1,10 @@
 import os
 import logging
 
+from todo_app.utility.logging_utility import configure_logs
+
+
+configure_logs()
 
 class MongoDbConfig:    
     def __init__(self):
