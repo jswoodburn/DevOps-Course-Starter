@@ -163,4 +163,4 @@ As described in the Manual section above, the webhook can be called automaticall
 
 ## Live site
 
-The site is hosted on Azure, and should be updated/redeployed when changes are pushed to `master`. The site can be found [here](https://jsw-todo-app.azurewebsites.net/).
+The site is hosted on Azure, and should be updated/redeployed when changes are pushed to `master`. The site can be found [here](https://dev-terraformed-jsw-todo-app.azurewebsites.net/).
