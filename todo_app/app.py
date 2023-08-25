@@ -8,6 +8,7 @@ from todo_app.config.flask_config import FlaskConfig
 from todo_app.models.view_model import ViewModel
 from todo_app.data.to_do_state import ToDoState
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(FlaskConfig())

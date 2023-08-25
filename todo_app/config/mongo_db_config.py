@@ -1,6 +1,7 @@
 import os
 import logging
 
+
 class MongoDbConfig:    
     def __init__(self):
         """MongoDB configuration variables."""

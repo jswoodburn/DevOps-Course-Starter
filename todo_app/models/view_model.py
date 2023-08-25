@@ -2,6 +2,7 @@ from todo_app.data.to_do_state import ToDoState
 from todo_app.models.item import Item
 from typing import List
 
+
 class ViewModel:
     def __init__(self, items):
         self._items: List[Item] = items

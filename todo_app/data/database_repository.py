@@ -7,6 +7,7 @@ from typing import List
 
 from todo_app.config.mongo_db_config import MongoDbConfig
 
+
 class DatabaseRepository:
     def __init__(self):
         self.config = MongoDbConfig()

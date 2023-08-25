@@ -8,6 +8,7 @@ from datetime import datetime
 from todo_app import app
 from todo_app.config.mongo_db_config import MongoDbConfig
 
+
 @pytest.fixture
 def client():
     file_path = find_dotenv('.env.test')

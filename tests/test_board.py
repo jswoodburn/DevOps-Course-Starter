@@ -16,6 +16,7 @@ done_yesterday_card_name = 'This is a card that was completed yesterday'
 now = datetime.now()
 yesterday = now - timedelta(days=1)
 
+
 def test_todo_cards_returned_from_board():
     # Given
     board = mock_board()

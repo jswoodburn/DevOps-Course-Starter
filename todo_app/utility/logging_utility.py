@@ -1,5 +1,6 @@
 import logging
 
+
 def configure_logs():
     # Apply global logging configuration.
     # Run this at the root of every function.
