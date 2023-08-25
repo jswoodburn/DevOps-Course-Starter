@@ -38,8 +38,7 @@ resource "azurerm_linux_web_app" "main" {
 
   site_config {
     application_stack {
-      docker_image     = "jackiew104/todo-app"
-      docker_image_tag = "prod" # TODO exercise-12: could change this to use prefix if had other images
+      docker_image_name     = "jackiew104/todo-app:prod"
     }
   }
 
