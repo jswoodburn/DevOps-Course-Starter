@@ -164,3 +164,7 @@ As described in the Manual section above, the webhook can be called automaticall
 ## Live site
 
 The site is hosted on Azure, and should be updated/redeployed when changes are pushed to `master`. The site can be found [here](https://dev-terraformed-jsw-todo-app.azurewebsites.net/).
+
+## Logs
+
+Logs for all environments are outputted to [Loggly](https://jswtodoapp.loggly.com/). To log to the console - e.g. for development/debugging - use `logging.getLogger("todo_app")` or replace `"todo_app"` with the root `__name__` of the Flask app. Alternatively, just using `logging` should default to this logger. 

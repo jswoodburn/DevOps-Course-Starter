@@ -3,18 +3,22 @@ from datetime import date
 from flask import Flask, redirect, render_template, request
 
 from todo_app.data.database_repository import DatabaseRepository
-from todo_app.item import Item
-from todo_app.flask_config import FlaskConfig
-from todo_app.view_model import ViewModel
+from todo_app.models.item import Item
+from todo_app.config.flask_config import FlaskConfig
+from todo_app.models.view_model import ViewModel
 from todo_app.data.to_do_state import ToDoState
+from todo_app.utility.logging_utility import LOGGLY_LOGGER, configure_logs
+import logging
+
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(FlaskConfig())
     
-    database = DatabaseRepository()
+    flask_config = FlaskConfig()
+    app.config.from_object(flask_config)
+    configure_logs(flask_config)        
 
-    list_ids_in_progression_order = []
+    database = DatabaseRepository()
 
     @app.route('/')
     def index():
@@ -45,6 +49,7 @@ def create_app():
         if current_status == ToDoState.DOING:
             return ToDoState.DONE
         
-        raise Exception("Item state does not have a successor")
+        logging.getLogger(LOGGLY_LOGGER).warning("Attempt made to update item that does not have a successive status.")
+        return ToDoState.DONE
 
     return app

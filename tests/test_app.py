@@ -6,7 +6,8 @@ import pymongo
 from datetime import datetime
 
 from todo_app import app
-from todo_app.mongo_db_config import MongoDbConfig
+from todo_app.config.mongo_db_config import MongoDbConfig
+
 
 @pytest.fixture
 def client():

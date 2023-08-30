@@ -1,5 +1,5 @@
-from todo_app.view_model import ViewModel
-from todo_app.item import Item
+from todo_app.models.view_model import ViewModel
+from todo_app.models.item import Item
 from todo_app.data.to_do_state import ToDoState
 
 from datetime import datetime, timedelta
@@ -15,6 +15,7 @@ done_yesterday_card_name = 'This is a card that was completed yesterday'
 
 now = datetime.now()
 yesterday = now - timedelta(days=1)
+
 
 def test_todo_cards_returned_from_board():
     # Given
