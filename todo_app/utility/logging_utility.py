@@ -4,10 +4,11 @@ from todo_app.config.flask_config import FlaskConfig
 from loggly.handlers import HTTPSHandler
 from logging import Formatter
 
+LOGGLY_LOGGER = "loggly_logger"
 
 def configure_logs(config: FlaskConfig):
     # Apply global logging configuration.
-    logger = logging.getLogger("azure_todo_app")
+    logger = logging.getLogger(LOGGLY_LOGGER)
     logger.setLevel(config.DEFAULT_LOG_LEVEL)
     
     handler = HTTPSHandler(f'https://logs-01.loggly.com/inputs/{config.LOGGLY_TOKEN}/tag/todo-app')

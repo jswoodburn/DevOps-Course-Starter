@@ -7,7 +7,7 @@ from todo_app.models.item import Item
 from todo_app.config.flask_config import FlaskConfig
 from todo_app.models.view_model import ViewModel
 from todo_app.data.to_do_state import ToDoState
-from todo_app.utility.logging_utility import configure_logs
+from todo_app.utility.logging_utility import LOGGLY_LOGGER, configure_logs
 import logging
 
 
@@ -49,7 +49,7 @@ def create_app():
         if current_status == ToDoState.DOING:
             return ToDoState.DONE
         
-        logging.warning("Attempt made to update item that does not have a successive status.")
+        logging.getLogger(LOGGLY_LOGGER).warning("Attempt made to update item that does not have a successive status.")
         return ToDoState.DONE
 
     return app

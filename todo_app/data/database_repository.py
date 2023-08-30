@@ -6,6 +6,7 @@ from datetime import datetime
 from typing import List
 import logging
 from todo_app.config.mongo_db_config import MongoDbConfig
+from todo_app.utility.logging_utility import LOGGLY_LOGGER
 
 
 class DatabaseRepository:
@@ -32,7 +33,7 @@ class DatabaseRepository:
 
             self.to_dos.insert_one(item)
         except Exception as e:
-            logging.error(f"Failed to create ToDo item with name {item_name} and status {status}: {str(e)}")
+            logging.getLogger(LOGGLY_LOGGER).error(f"Failed to create ToDo item with name {item_name} and status {status}: {str(e)}")
             raise
 
     def update_item_list_id(self, item_id: str, updated_status: ToDoState) -> None:
@@ -46,5 +47,5 @@ class DatabaseRepository:
                 }
             )
         except Exception as e:
-            logging.error(f"Failed to update ToDo status for item with ID {item_id}: {str(e)}")
+            logging.getLogger(LOGGLY_LOGGER).error(f"Failed to update ToDo status for item with ID {item_id}: {str(e)}")
             raise
